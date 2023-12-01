@@ -14,13 +14,7 @@ app.use("/movies", moviesRouter);
 app.use("/reviews", reviewsRouter);
 app.use("/theaters", theatersRouter);
 
-// Not found handler
-app.use((req, res, next) => {
-  next({
-    status: 404,
-    message: `Not found: ${req.originalURL}`,
-  });
-});
+
 
 //Error Handler
 app.use((error, req, res, next) => {
