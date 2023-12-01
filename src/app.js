@@ -16,6 +16,10 @@ const errorHandler = require("./errors/errorHandler");
 // Use Express
 app.use(express.json());
 
+app.use(cors({
+  origin: '*',
+}));
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'https://movies-frontend-csfo.onrender.com/');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
