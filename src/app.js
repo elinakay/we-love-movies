@@ -1,25 +1,32 @@
+// Require Express, Dotenv, and Cors
 if (process.env.USER) require("dotenv").config();
 const express = require("express");
+const cors = require("cors"); // Add this line
 const app = express();
-const cors = require("cors");
 
-const moviesRouter = require("./routes/movies/movies.router");
-const reviewsRouter = require("./routes/reviews/reviews.router");
-const theatersRouter = require("./routes/theaters/theaters.router");
+// Require the routers
+const moviesRouter = require("./movies/movies.router");
+const theatersRouter = require("./theaters/theaters.router");
+const reviewsRouter = require("./reviews/reviews.router");
 
-app.use(cors());
+// Require the error handling functions
+const notFound = require("./errors/notFound");
+const errorHandler = require("./errors/errorHandler");
+
+// Use Express
 app.use(express.json());
-app.options("*", cors());
 
+// Use the cors middleware (allowing all origins for demonstration purposes)
+app.use(cors());
+
+// Use the routers
 app.use("/movies", moviesRouter);
-app.use("/reviews", reviewsRouter);
 app.use("/theaters", theatersRouter);
+app.use("/reviews", reviewsRouter);
 
-// Error Handler
-app.use((error, req, res, next) => {
-  console.error(error);
-  const { status = 500, message = "Something went wrong!" } = error;
-  res.status(status).json({ error: message });
-});
+// Use the error handling functions
+app.use(notFound);
+app.use(errorHandler);
 
 module.exports = app;
+
