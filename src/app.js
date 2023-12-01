@@ -16,11 +16,13 @@ const errorHandler = require("./errors/errorHandler");
 // Use Express
 app.use(express.json());
 
-// Use the cors middleware
-app.use(cors({
-  origin: 'https://movies-frontend-csfo.onrender.com',
-  credentials: true,
-}));
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://movies-frontend-csfo.onrender.com');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
 // Handling preflight requests
 app.options('*', cors());
 
