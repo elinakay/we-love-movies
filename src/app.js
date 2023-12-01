@@ -16,8 +16,11 @@ const errorHandler = require("./errors/errorHandler");
 // Use Express
 app.use(express.json());
 
-// Use the cors middleware (allowing all origins for demonstration purposes)
-app.use(cors());
+// Use the cors middleware
+app.use(cors({
+  origin: 'https://movies-frontend-csfo.onrender.com',
+  credentials: true,
+}));
 // Handling preflight requests
 app.options('*', cors());
 
