@@ -16,14 +16,12 @@ const errorHandler = require("./errors/errorHandler");
 // Use Express
 app.use(express.json());
 
-// Enable CORS for all routes
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Origin', 'https://movies-frontend-csfo.onrender.com');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.header('Access-Control-Allow-Credentials', true);
 
-  // Handle preflight requests
   if (req.method === 'OPTIONS') {
     res.status(200).end();
   } else {
