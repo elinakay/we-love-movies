@@ -9,10 +9,13 @@ const theatersRouter = require("./routes/theaters/theaters.router");
 
 // Custom CORS configuration
 app.use(cors({
-  origin: '*',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  headers: 'Content-Type',
-}));
+    origin: '*', 
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    headers: 'Content-Type, Authorization', 
+    exposedHeaders: 'Content-Type, Authorization', 
+    credentials: true,
+  }));
+  
 
 app.use(express.json());
 
