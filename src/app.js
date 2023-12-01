@@ -18,6 +18,8 @@ app.use(express.json());
 
 // Use the cors middleware (allowing all origins for demonstration purposes)
 app.use(cors());
+// Handling preflight requests
+app.options('*', cors());
 
 // Use the routers
 app.use("/movies", moviesRouter);
