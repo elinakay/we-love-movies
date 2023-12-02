@@ -16,18 +16,12 @@ const errorHandler = require("./errors/errorHandler");
 // Use Express
 app.use(express.json());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://movies-frontend-csfo.onrender.com');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.header('Access-Control-Allow-Credentials', true);
-
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-  } else {
-    next();
-  }
-});
+app.use(cors({
+  origin: 'https://movies-frontend-csfo.onrender.com',
+  methods: 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+  allowedHeaders: 'Content-Type, Authorization',
+  credentials: true,
+}));
 
 // Use the routers
 app.use("/movies", moviesRouter);
